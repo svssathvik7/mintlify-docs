@@ -1,22 +1,74 @@
 import React, { useEffect, useState } from "react";
 
+export const MAINNET_ASSETS_URL = "https://api.garden.finance/v2/chains";
+export const TESTNET_ASSETS_URL = "https://testnet.api.garden.finance/v2/chains";
+
+export const CHAIN_EXPLORERS = {
+  botanix: "https://botanixscan.io/",
+  hyperliquid: "https://purrsec.com/",
+  corn: "https://cornscan.io/",
+  ethereum: "https://etherscan.io/",
+  bera: "https://berascan.com/",
+  starknet: "https://starkscan.co/",
+  solana: "https://explorer.solana.com/",
+  base: "https://basescan.org/",
+  unichain: "https://uniscan.xyz/",
+  arbitrum: "https://arbiscan.io/",
+  bitcoin: "https://mempool.space/",
+  starknet_sepolia: "https://sepolia.starkscan.co/",
+  ethereum_sepolia: "https://sepolia.etherscan.io/",
+  solana_testnet: "https://explorer.solana.com/",
+  citrea_testnet: "https://explorer.testnet.citrea.xyz/",
+  base_sepolia: "https://sepolia.basescan.org/",
+  monad_testnet: "https://explorer.monad-devnet.devnet101.com",
+  arbitrum_sepolia: "https://sepolia.arbiscan.io/",
+  bitcoin_testnet: "https://mempool.space/testnet4/"
+};
+
+
+
+export const trimAssetName = (id)=>{
+  return id.split(":")[1].toUpperCase();
+}
+
+export const titilize = (chain)=>{
+  const chainSplit = chain.split("_");
+  const firstWord = chainSplit[0].charAt(0).toUpperCase() + chainSplit[0].slice(1);
+  const secondWord = chainSplit.length > 1 ? chainSplit[1].charAt(0).toUpperCase() + chainSplit[1].slice(1) : "";
+  return firstWord + " " + secondWord;
+}
+
+export const getExplorerUrl = (chain, address) => {
+  if(chain.includes("bitcoin")){
+    return "/developers/contracts/atomic-swap-btc";
+  } else if (chain.includes("starknet")){
+    return CHAIN_EXPLORERS[chain] + "contract/" + address + "#overview";
+  } else {
+    return CHAIN_EXPLORERS[chain] + "address/" + address + "#code";
+  }
+}
+
 export const AssetRow = ({ chain, assets }) => {
   return (
     <tr>
-      <td className="flex items-center gap-2">
-        <img src={chain.icon} width="20" alt={chain.chain} />
-        <strong>{chain.chain}</strong>
+      <td className="flex items-center gap-2 w-fit whitespace-nowrap" colSpan={4}>
+        <Frame className="pointer-events-none w-[20px]">
+          <img width="20" src={chain.icon} alt={chain.chain} />
+        </Frame>
+        <strong>{titilize(chain.chain)}</strong>
       </td>
       <td colSpan={4}>
-        <div className="flex gap-4 flex-wrap">
+        <div className="flex gap-4 flex-wrap mx-2">
           {assets.map((asset, i) => (
             <a
               key={i}
-              href={asset.htlc} // using htlc instead of contract, since your data uses `htlc`
-              className="border-none flex items-center gap-1"
+              href={getExplorerUrl(chain.chain,asset.htlc)}
+              className="border-none flex items-center gap-2"
             >
-              <img src={asset.icon} width={20} alt={asset.id} />
-              <span>{asset.id}</span>
+              <Frame className="pointer-events-none w-[20px]">
+                <img width="20" src={asset.icon} alt={asset.id}/>
+              </Frame>
+              <span>{trimAssetName(asset.id)}</span>
             </a>
           ))}
         </div>
@@ -25,16 +77,31 @@ export const AssetRow = ({ chain, assets }) => {
   );
 };
 
-export const SupportedAssets = () => {
+export const getAssets = async (url = MAINNET_ASSETS_URL)=>{
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    if(data.status.includes("OK")){
+      return [];
+    }
+    const sortedResult = data.result.sort((a, b) => {
+      return a.chain.localeCompare(b.chain);
+    });
+    return sortedResult;
+  } catch (error) {
+    console.log("Error fetching assets",error);
+    return [];
+  }
+}
+
+export const SupportedAssets = ({url}) => {
   const [supportedAssetsConfig, setSupportedAssetsConfig] = useState([]);
 
   useEffect(() => {
     const fetchAssets = async () => {
       try {
-        const response = await fetch("https://api.garden.finance/v2/chains");
-        const data = await response.json();
-        console.log("response", data.result);
-        setSupportedAssetsConfig(data.result);
+        const assetsConfig = await getAssets(url);
+        setSupportedAssetsConfig(assetsConfig);
       } catch (error) {
         console.error("Failed to fetch assets:", error);
       }

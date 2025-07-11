@@ -1,0 +1,242 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Garden Docs",
+  "colors": {
+    "primary": "#e36492",
+    "light": "#f2f7fb",
+    "dark": "#1b1b1d"
+  },
+  "favicon": "/favicon.svg",
+  "openapi": "api-reference/openapi.json",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Home",
+        "groups": [
+          {
+            "group": "Fundamentals",
+            "pages": [
+              {
+                "group": "Introduction",
+                "pages": [
+                  "home/fundamentals/introduction/intents",
+                  "home/fundamentals/introduction/atomic-swaps",
+                  "home/fundamentals/introduction/solvers",
+                  "home/fundamentals/introduction/stakers",
+                  "home/fundamentals/introduction/auctions"
+                ]
+              },
+              {
+                "group": "How It Works",
+                "pages": [
+                  "home/fundamentals/how-it-works/intent-flow",
+                  "home/fundamentals/how-it-works/cross-chain-coincidence-of-wants-xcow"
+                ]
+              },
+              {
+                "group": "Benefits",
+                "pages": [
+                  "home/fundamentals/benefits/overview",
+                  "home/fundamentals/benefits/no-custody-risk",
+                  "home/fundamentals/benefits/broad-chain-coverage",
+                  "home/fundamentals/benefits/better-prices",
+                  "home/fundamentals/benefits/free-option-protection"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "User Guides",
+            "pages": [
+              {
+                "group": "Swap",
+                "pages": [
+                  "home/basics/guides/swap/btc-wbtc",
+                  "home/basics/guides/swap/wbtc-btc",
+                  "home/basics/guides/swap/wbtc-wbtc"
+                ]
+              },
+              "home/basics/guides/stake/stake-seed"
+            ]
+          },
+          {
+            "group": "Governance",
+            "pages": [
+              "home/governance",
+              "home/governance/governance-process",
+              "home/governance/tokenomics",
+              "home/governance/gardener-pass",
+              "home/governance/snapshot"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Developers",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "developers/overview",
+              "developers/supported-chains",
+              "developers/affiliate-fees"
+            ]
+          },
+          {
+            "group": "SDK",
+            "pages": [
+              "developers/sdk/overview",
+              {
+                "group": "React",
+                "pages": [
+                  "developers/sdk/react/setup",
+                  "developers/sdk/react/quickstart"
+                ]
+              },
+              {
+                "group": "NodeJS",
+                "pages": [
+                  "developers/sdk/nodejs/setup",
+                  "developers/sdk/nodejs/quickstart"
+                ]
+              }
+            ]
+          },
+
+          {
+            "group": "Core Concepts",
+            "pages": [
+              "developers/core/core",
+              "developers/core/order-lifecycle",
+              "developers/core/sessions"
+            ]
+          },
+          {
+            "group": "Smart Contracts",
+            "pages": [
+              "developers/contracts/contracts",
+              "developers/contracts/atomic-swap-evm",
+              "developers/contracts/atomic-swap-btc"
+            ]
+          },
+          {
+            "group": "Cookbook",
+            "pages": [
+              "developers/cookbook/welcome",
+              "developers/cookbook/integrate",
+              "developers/cookbook/bridge"
+            ]
+          },
+          {
+            "group": "Testing",
+            "pages": [
+              "developers/localnet"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "api-reference/quickstart"
+            ]
+          },
+          {
+            "group": "Quote",
+            "pages": [
+              "api-reference/endpoint/quote/get-quote",
+              "api-reference/endpoint/quote/create-attested",
+              "api-reference/endpoint/quote/get-strategies",
+              "api-reference/endpoint/quote/get-liquidity"
+            ]
+          },
+          {
+            "group": "Orderbook",
+            "pages": [
+              "api-reference/endpoint/orderbook/get-orders",
+              "api-reference/endpoint/orderbook/create-order",
+              "api-reference/endpoint/orderbook/get-order-by-id",
+              "api-reference/endpoint/orderbook/add-bitcoin-info",
+              "api-reference/endpoint/orderbook/get-user-orders",
+              "api-reference/endpoint/orderbook/get-user-order-count",
+              "api-reference/endpoint/orderbook/get-volume",
+              "api-reference/endpoint/orderbook/get-fees",
+              "api-reference/endpoint/orderbook/get-solver-committed-funds"
+            ]
+          },
+          {
+            "group": "Relayer",
+            "pages": [
+              "api-reference/endpoint/relayer/initiate",
+              "api-reference/endpoint/relayer/redeem",
+              "api-reference/endpoint/relayer/create-order",
+              "api-reference/endpoint/relayer/instant-refund-hash",
+              "api-reference/endpoint/relayer/instant-refund",
+              "api-reference/endpoint/relayer/health"
+            ]
+          },
+          {
+            "group": "Starknet Relayer",
+            "pages": [
+              "api-reference/endpoint/starknet-relayer/initiate",
+              "api-reference/endpoint/starknet-relayer/redeem"
+            ]
+          },
+          {
+            "group": "Solana Relayer",
+            "pages": [
+              "api-reference/endpoint/solana-relayer/redeem"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "GitHub",
+          "href": "https://github.com/gardenfi",
+          "icon": "github"
+        },
+        {
+          "anchor": "Blog",
+          "href": "https://garden.finance/blog",
+          "icon": "newspaper"
+        },
+        {
+          "anchor": "Community",
+          "href": "https://discord.gg/dZwSjh9922",
+          "icon": "discord"
+        }
+      ]
+    }
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "https://discord.gg/dZwSjh9922"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Launch App",
+      "href": "https://app.garden.finance"
+    }
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/garden_finance",
+      "github": "https://github.com/gardenfi",
+      "discord": "https://discord.gg/dZwSjh9922"
+    }
+  }
+}
